@@ -32,20 +32,31 @@ var mas = [];
     mas[5] = bear6;
     mas[6] = bear7;
 var i = 0;
+var spped = 10;
+var x =50;
+var y = 100;
+
+var isLeft = false;
+var isRight = false;
+var isUp = false;
+var isDown = false;
 
 setInterval(function () {
 
+    document.addEventListener("keydown",checkkeyDown,false);
+    document.addEventListener("keyup",checkkeyUp,false);
 
     if(i>6)
     {
-        console.log(i);
+        //console.log(i);
         i=0;
 
    }
     else
     {
-        console.log(i);
-        draw(i);
+        move();
+
+        draw(i,5);
         i+=1;
 
     }
@@ -53,7 +64,67 @@ setInterval(function () {
 },100);
 
 
+function checkkeyDown(e) {
+    var keyID = e.key.Code || e.which;
+    //console.log(keyID);
+    var keyChar = String.fromCharCode(keyID);
+    console.log(keyChar);
 
+    if(keyChar == "%") //left
+    {
+        isLeft = true;
+        e.preventDefault();
+    }
+    if(keyChar == "'") //right
+    {
+        isRight = true;
+        e.preventDefault();
+    }
+    if(keyChar == "&") //up
+    {
+        isUp = true;
+        e.preventDefault();
+    }
+    if(keyChar == "(") //down
+    {
+        isDown = true;
+        e.preventDefault();
+    }
+}
+function checkkeyUp(e) {
+    var keyID = e.key.Code || e.which;
+    //console.log(keyID);
+    var keyChar = String.fromCharCode(keyID);
+    console.log(keyChar);
+
+    if(keyChar == "%") //left
+    {
+        isLeft = false;
+        e.preventDefault();
+    }
+    if(keyChar == "'") //right
+    {
+        isRight = false;
+        e.preventDefault();
+    }
+    if(keyChar == "&") //up
+    {
+        isUp = false;
+        e.preventDefault();
+    }
+    if(keyChar == "(") //down
+    {
+        isDown = false;
+        e.preventDefault();
+    }
+}
+
+function move() {
+    if(isLeft) x-=spped;
+    if(isRight) x+=spped;
+    if(isUp) y-=spped;
+    if(isDown) y+=spped;
+}
 
 
 
@@ -62,9 +133,10 @@ setInterval(function () {
 
 
 function draw(k) {
-    ctx.clearRect(50,100,57,60);
+   // x+=spped;
+    ctx.clearRect(0,0,500,500);
 
-    ctx.drawImage(mas[k], 50, 100, 47, 58);
+    ctx.drawImage(mas[k], x, y, 47, 58);
 
 
 
