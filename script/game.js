@@ -63,7 +63,7 @@ setInterval(function () {
 
 function draw(k) {
     ctx.clearRect(50,100,57,60);
-console.log("dd");
+
     ctx.drawImage(mas[k], 50, 100, 47, 58);
 
 
